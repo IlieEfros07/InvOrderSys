@@ -1,53 +1,54 @@
 package com.app.invordersys.models;
 
+import com.app.invordersys.models.Category;
+
+import java.math.BigDecimal;
+
 public class Product {
-
-    private int product_id;
-
+    private int productId;
     private String name;
-
+    private BigDecimal price;
+    private int stock;
+    private Category category;
     private int categoryId;
 
-    private double price;
-
-    private int stock;
-
-    public Product(int product_id, String name, int categoryId,double price, int stock){
-        this.product_id=product_id;
-        this.name=name;
-        this.categoryId=categoryId;
-        this.price=price;
-        this.stock=stock;
+    public Product(int productId, String name, BigDecimal price, int stock, Category category) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.category = category;
+        this.categoryId = (category != null) ? category.getId() : 0;
     }
 
-    public Product(int productId, String name) {
+    public Product(int productId, String name, BigDecimal price, int stock, int categoryId) {
+        this.productId = productId;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.categoryId = categoryId;
+        this.category = null;
     }
 
-    public int getProductId() {
-        return product_id;
+    public Product(int id, String name) {
+        this.productId = id;
+        this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+    public int getProductId() { return productId; }
+    public String getName() { return name; }
+    public BigDecimal getPrice() { return price; }
+    public int getStock() { return stock; }
 
     public int getCategoryId() {
-        return categoryId;
+        return category != null ? category.getId() : categoryId;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
+    public Category getCategory() { return category; }
 
     @Override
-    public String toString(){
-        return this.name + " -$ "+ this.price;
+    public String toString() {
+        String categoryName = (category != null) ? category.getName() : "No Category";
+        return name + " (" + categoryName + ") - $" + price;
     }
-
-
 }

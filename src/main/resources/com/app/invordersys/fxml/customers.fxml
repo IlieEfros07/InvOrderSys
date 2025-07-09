@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.app.invordersys.controllers.CustomerController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Label text="Custommers" />
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.app.invordersys.controllers.CustomerController"
+      prefHeight="600.0" prefWidth="800.0"
+      spacing="20">
 
-</AnchorPane>
+    <!-- Page Header -->
+    <Label text="Customers" styleClass="page-header"/>
+
+    <!-- Action Section -->
+    <HBox styleClass="action-section">
+        <Button fx:id="customerCreate" text="Add New Customer" styleClass="primary-button"/>
+    </HBox>
+
+    <!-- Search Section -->
+    <HBox styleClass="search-section">
+        <Label text="Search Customers:" styleClass="section-label"/>
+        <TextField fx:id="searchCustomer" promptText="Enter name, email, or phone..." styleClass="search-field"/>
+        <Button fx:id="searchCustomerBtn" text="Search" styleClass="search-button"/>
+    </HBox>
+
+    <!-- Customers List -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox fx:id="customerList" styleClass="list-container" spacing="10">
+            <!-- Dynamic customer boxes will be added here -->
+        </VBox>
+    </ScrollPane>
+
+</VBox>

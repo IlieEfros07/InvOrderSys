@@ -5,23 +5,25 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.app.invordersys.controllers.SupplierCreateController"
+            fx:controller="com.app.invordersys.controllers.CustomersCreateFormController"
             prefHeight="500.0" prefWidth="600.0">
 
     <VBox AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
 
         <!-- Form Container -->
         <VBox styleClass="form-container">
-            <Label text="Add New Supplier" styleClass="form-title"/>
+            <Label text="Add New Customer" styleClass="form-title"/>
 
-            <TextField fx:id="nameField" promptText="Supplier Name" styleClass="text-field"/>
+            <TextField fx:id="nameField" promptText="Full Name" styleClass="text-field"/>
 
-            <TextField fx:id="emailField" promptText="Contact Email" styleClass="text-field"/>
+            <TextField fx:id="emailField" promptText="Email Address" styleClass="text-field"/>
 
             <TextField fx:id="phoneField" promptText="Phone Number" styleClass="text-field"/>
 
+            <TextField fx:id="addressField" promptText="Address" styleClass="text-field"/>
+
             <HBox spacing="15" alignment="CENTER">
-                <Button text="Save Supplier" onAction="#handleSubmit" styleClass="primary-button"/>
+                <Button text="Save Customer" onAction="#handleSubmit" styleClass="primary-button"/>
                 <Button text="Cancel" styleClass="secondary-button"/>
             </HBox>
         </VBox>

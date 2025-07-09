@@ -18,6 +18,12 @@ public class SupplierCreateController {
     @FXML
     public TextField phoneField;
 
+    private SupplierController mainController;
+    public void setMainController(SupplierController controller)
+    {
+        this.mainController=controller;
+    }
+
     @FXML
     public void initialize(){
 

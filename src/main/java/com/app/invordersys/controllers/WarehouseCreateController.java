@@ -9,6 +9,7 @@ import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
+
 public class WarehouseCreateController {
 
     @FXML
@@ -16,6 +17,12 @@ public class WarehouseCreateController {
 
     @FXML
     public TextField addressField;
+
+    private WarehouseController mainController;
+    public void setMainController(WarehouseController controller)
+    {
+        this.mainController=controller;
+    }
 
 
     @FXML

@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.app.invordersys.controllers.SupplierController"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.app.invordersys.controllers.SupplierController"
+      prefHeight="600.0" prefWidth="800.0"
+      spacing="20">
 
-    <Label text="Supplier" />
+    <!-- Page Header -->
+    <Label text="Suppliers" styleClass="page-header"/>
 
-    <Button fx:id="supplierCreate" text="Add Supplier"/>
+    <!-- Action Section -->
+    <HBox styleClass="action-section">
+        <Button fx:id="supplierCreate" text="Add New Supplier" styleClass="primary-button"/>
+    </HBox>
 
-</AnchorPane>
+    <HBox styleClass="search-section">
+        <Label text="Search Supplier:" styleClass="section-label"/>
+        <TextField fx:id="searchSupplier" promptText="Enter name, email, or phone..." styleClass="search-field"/>
+        <Button fx:id="searchSupplierBtn" text="Search" styleClass="search-button"/>
+    </HBox>
+
+
+    <!-- Suppliers List -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS">
+        <VBox fx:id="supplierList" styleClass="list-container" spacing="10">
+            <!-- Dynamic supplier boxes will be added here -->
+        </VBox>
+    </ScrollPane>
+
+</VBox>

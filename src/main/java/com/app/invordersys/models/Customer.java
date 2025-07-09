@@ -7,6 +7,7 @@ public class Customer {
     private String phone;
     private String address;
 
+    // Full constructor
     public Customer(int id, String name, String email, String phone, String address) {
         this.id = id;
         this.name = name;
@@ -15,7 +16,13 @@ public class Customer {
         this.address = address;
     }
 
-    public Customer(int customerId, String name) {
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+        this.email = null;
+        this.phone = null;
+        this.address = null;
     }
 
     public int getId() { return id; }

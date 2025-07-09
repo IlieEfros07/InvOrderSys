@@ -1,8 +1,6 @@
 package com.app.invordersys.controllers;
 
-import com.app.invordersys.models.Customer;
-import com.app.invordersys.models.OrderItem;
-import com.app.invordersys.models.Product;
+import com.app.invordersys.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +9,9 @@ import javafx.scene.control.*;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderCreateController {
 
@@ -34,6 +34,12 @@ public class OrderCreateController {
     private ListView<String> orderItemsList;
 
     private final List<OrderItem> orderItems = new ArrayList<>();
+
+    private OrderController mainController;
+    public void setMainController(OrderController controller)
+    {
+        this.mainController=controller;
+    }
 
     @FXML
     public void initialize() {
@@ -105,6 +111,22 @@ public class OrderCreateController {
         }
     }
 
+
+    private Map<Integer, Category> loadCategoryMap(Connection conn) throws SQLException {
+        Map<Integer, Category> categoryMap = new HashMap<>();
+        String sql = "SELECT * FROM categories";
+
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                int id = rs.getInt("category_id");
+                String name = rs.getString("category_name");
+                categoryMap.put(id, new Category(id, name));
+            }
+        }
+        return categoryMap;
+    }
+
+
     private void loadCustomers() {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
         String sql = "SELECT * FROM customers";
@@ -119,21 +141,36 @@ public class OrderCreateController {
             e.printStackTrace();
         }
     }
-
     private void loadProducts() {
         ObservableList<Product> products = FXCollections.observableArrayList();
         String sql = "SELECT * FROM products";
+
         try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/invordersys", "root", "root");
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
+
+            Map<Integer, Category> categoryMap = loadCategoryMap(conn);
+
             while (rs.next()) {
-                products.add(new Product(rs.getInt("product_id"), rs.getString("name")));
+                int id = rs.getInt("product_id");
+                String name = rs.getString("name");
+                BigDecimal price = rs.getBigDecimal("price");
+                int stock = rs.getInt("stock_quantity");
+                int categoryId = rs.getInt("category_id");
+
+                Category category = categoryMap.get(categoryId);
+
+                Product product = new Product(id, name, price, stock, category);
+                products.add(product);
             }
+
             productField.setItems(products);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 
     private void showAlert(String title, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -142,4 +179,7 @@ public class OrderCreateController {
         alert.setContentText(msg);
         alert.showAndWait();
     }
+
+
 }
+

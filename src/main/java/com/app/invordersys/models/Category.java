@@ -2,24 +2,32 @@ package com.app.invordersys.models;
 
 public class Category {
 
-    public int category_id;
+    private int categoryId;
+    private String categoryName;
 
-    public String category_name;
-
-    public Category(int catId , String catName ){this.category_id=catId; this.category_name=catName;}
-
-    public int getId(){
-        return this.category_id;
+    public Category(int catId, String catName) {
+        this.categoryId = catId;
+        this.categoryName = catName;
     }
 
-    public String getName(){
-        return this.category_name;
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public int getId() {
+        return categoryId;
+    }
+
+    public String getName() {
+        return categoryName;
     }
 
     @Override
-    public String toString(){
-        return this.category_name;
+    public String toString() {
+        return categoryName;
     }
-
-
 }

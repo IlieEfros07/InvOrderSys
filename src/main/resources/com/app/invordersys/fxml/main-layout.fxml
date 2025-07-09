@@ -1,33 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.app.invordersys.controllers.MainController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="600.0" prefWidth="1000.0"
+            styleClass="root">
 
-    <VBox>
-        <HBox>
-            <Label text="Inventory &amp; Order System" />
-            <HBox>
+    <VBox AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <!-- Navigation Header -->
+        <HBox styleClass="nav-container">
+            <Label text="Inventory &amp; Order System" styleClass="nav-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox styleClass="nav-buttons">
                 <Button fx:id="productsPage" text="Products" styleClass="nav-button" onAction="#showProducts"/>
                 <Button fx:id="ordersPage" text="Orders" styleClass="nav-button" onAction="#showOrders"/>
                 <Button fx:id="customersPage" text="Customers" styleClass="nav-button" onAction="#showCustomers"/>
                 <Button fx:id="warehousesPage" text="Warehouses" styleClass="nav-button" onAction="#showWarehouses"/>
-                <Button fx:id="supplierPage" text="Supplier" styleClass="nav-button" onAction="#showSupplier"/>
+                <Button fx:id="supplierPage" text="Suppliers" styleClass="nav-button" onAction="#showSupplier"/>
                 <Button fx:id="restockRequestsPage" text="Restock Requests" styleClass="nav-button" onAction="#showRestockRequests"/>
-
-
-
             </HBox>
         </HBox>
-        <AnchorPane fx:id="contentPane"/>
-    </VBox>
 
+        <!-- Content Area -->
+        <AnchorPane fx:id="contentPane" styleClass="content-pane" VBox.vgrow="ALWAYS"/>
+    </VBox>
 
 </AnchorPane>

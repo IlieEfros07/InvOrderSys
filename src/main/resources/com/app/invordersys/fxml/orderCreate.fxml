@@ -1,40 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.app.invordersys.controllers.OrderCreateController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="700.0" prefWidth="800.0">
 
-    <VBox>
+    <ScrollPane AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitToWidth="true">
+        <VBox spacing="20" styleClass="content-pane">
 
-        <Label text="Create Order" />
+            <!-- Form Container -->
+            <VBox styleClass="form-container">
+                <Label text="Create New Order" styleClass="form-title"/>
 
-        <ComboBox fx:id="customerField" promptText="Select Customer" />
-        <ComboBox fx:id="statusField" promptText="Order Status" />
+                <VBox spacing="5">
+                    <Label text="Customer:" styleClass="label"/>
+                    <ComboBox fx:id="customerField" promptText="Select Customer" styleClass="combo-box"/>
+                </VBox>
 
-        <Label text="Add Order Item" />
+                <VBox spacing="5">
+                    <Label text="Order Status:" styleClass="label"/>
+                    <ComboBox fx:id="statusField" promptText="Select Status" styleClass="combo-box" />
+                </VBox>
+            </VBox>
 
-        <HBox spacing="10" alignment="CENTER">
-            <ComboBox fx:id="productField" promptText="Select Product" />
-            <TextField fx:id="quantityField" promptText="Quantity" />
-            <TextField fx:id="priceField" promptText="Price at Time" />
-            <Button text="Add Item" onAction="#handleAddItem" />
-        </HBox>
+            <!-- Order Items Section -->
+            <VBox styleClass="form-container">
+                <Label text="Order Items" styleClass="form-title"/>
 
-        <ListView fx:id="orderItemsList" prefHeight="120" />
+                <VBox styleClass="order-item-section">
+                    <Label text="Add Order Item" styleClass="section-label"/>
 
-        <Button text="Save Order" onAction="#handleSubmit" />
+                    <HBox styleClass="order-item-controls">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS">
+                            <Label text="Product:" styleClass="label"/>
+                            <ComboBox fx:id="productField" promptText="Select Product" styleClass="combo-box" prefWidth="200"/>
+                        </VBox>
 
+                        <VBox spacing="5">
+                            <Label text="Quantity:" styleClass="label"/>
+                            <TextField fx:id="quantityField" promptText="Qty" styleClass="text-field" prefWidth="80"/>
+                        </VBox>
 
+                        <VBox spacing="5">
+                            <Label text="Price:" styleClass="label"/>
+                            <TextField fx:id="priceField" promptText="Price" styleClass="text-field" prefWidth="100"/>
+                        </VBox>
 
+                        <VBox spacing="5">
+                            <Label text=" " styleClass="label"/>
+                            <Button text="Add Item" onAction="#handleAddItem" styleClass="secondary-button"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
 
-    </VBox>
+                <VBox spacing="5">
+                    <Label text="Order Items:" styleClass="section-label"/>
+                    <ListView fx:id="orderItemsList" prefHeight="150" styleClass="list-view"/>
+                </VBox>
+            </VBox>
 
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Save Order" onAction="#handleSubmit" styleClass="primary-button"/>
+                <Button text="Cancel" styleClass="secondary-button"/>
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
 
 </AnchorPane>
