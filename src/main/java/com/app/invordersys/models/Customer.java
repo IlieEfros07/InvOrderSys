@@ -7,7 +7,6 @@ public class Customer {
     private String phone;
     private String address;
 
-    // Full constructor
     public Customer(int id, String name, String email, String phone, String address) {
         this.id = id;
         this.name = name;

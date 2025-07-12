@@ -3,6 +3,7 @@ module com.app.invordersys {
     requires javafx.fxml;
     requires jdk.compiler;
     requires java.sql;
+    requires jbcrypt;
 
 
     opens com.app.invordersys to javafx.fxml;

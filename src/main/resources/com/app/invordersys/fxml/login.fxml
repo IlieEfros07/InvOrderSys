@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.invordersys.controllers.LoginController"
+            prefHeight="600.0" prefWidth="800.0"
+            styleClass="root">
+
+    <VBox AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+          alignment="CENTER" spacing="0">
+
+        <HBox styleClass="nav-container" prefHeight="80.0" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="20" bottom="20" left="40" right="40"/>
+            </padding>
+            <Label text="InvOrderSys" styleClass="nav-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="Inventory Management System"
+                   style="-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 14px;"/>
+        </HBox>
+
+        <VBox alignment="CENTER" VBox.vgrow="ALWAYS" styleClass="content-pane">
+            <padding>
+                <Insets top="40" bottom="40" left="40" right="40"/>
+            </padding>
+
+            <VBox styleClass="form-container" alignment="CENTER" spacing="25"
+                  prefWidth="400.0" maxWidth="400.0">
+
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Welcome Back" styleClass="form-title"
+                           style="-fx-font-size: 24px; -fx-text-alignment: center;"/>
+                    <Label text="Please sign in to your account"
+                           style="-fx-text-fill: #6c757d; -fx-font-size: 14px; -fx-text-alignment: center;"/>
+                </VBox>
+
+                <VBox spacing="20" alignment="CENTER">
+
+                    <VBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="Username" styleClass="section-label"
+                               style="-fx-font-size: 14px; -fx-font-weight: normal;"/>
+                        <TextField fx:id="usernameField"
+                                   promptText="Enter your username"
+                                   styleClass="text-field"
+                                   prefWidth="350.0"/>
+                    </VBox>
+
+                    <VBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="Password" styleClass="section-label"
+                               style="-fx-font-size: 14px; -fx-font-weight: normal;"/>
+                        <PasswordField fx:id="passwordField"
+                                       promptText="Enter your password"
+                                       styleClass="text-field"
+                                       prefWidth="350.0"/>
+                    </VBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="10" prefWidth="350.0">
+                        <CheckBox fx:id="rememberMeCheckBox" text="Remember me"
+                                  style="-fx-text-fill: #374151; -fx-font-size: 13px;"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Label text="Forgot password?"
+                               style="-fx-text-fill: #667eea; -fx-font-size: 13px; -fx-cursor: hand;"
+                               />
+<!--                        onMouseClicked="#handleForgotPassword"-->
+                    </HBox>
+
+                    <!-- Login Button -->
+                    <Button fx:id="loginButton"
+                            text="Sign In"
+                            styleClass="primary-button"
+                            prefWidth="350.0"
+                            prefHeight="45.0"
+                            style="-fx-font-size: 16px;"/>
+
+                    <Label fx:id="errorMessageLabel"
+                           text=""
+                           style="-fx-text-fill: #ef4444; -fx-font-size: 13px; -fx-text-alignment: center;"
+                           managed="false"/>
+
+                </VBox>
+
+
+
+            </VBox>
+
+        </VBox>
+
+
+
+    </VBox>
+
+</AnchorPane>
