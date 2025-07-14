@@ -2,10 +2,12 @@ package com.app.invordersys.controllers;
 
 import com.app.invordersys.MainApplication;
 import com.app.invordersys.models.Supplier;
+import com.app.invordersys.models.Warehouse;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -79,12 +81,72 @@ public class SupplierController {
         Label emailLabel = new Label(supplier.getEmail());
         Label phoneLabel = new Label(supplier.getPhone());
 
-        HBox hbox = new HBox(nameLabel, emailLabel, phoneLabel);
+        Button updateBtn = new Button("Update");
+        updateBtn.getStyleClass().add("update-button");
+        updateBtn.setOnAction(e-> openSupplierUpdate(supplier));
+
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.getStyleClass().add("delete-button");
+        deleteBtn.setOnAction(e-> deleteSupplier(supplier));
+
+        HBox hbox = new HBox(nameLabel, emailLabel, phoneLabel,updateBtn,deleteBtn);
         hbox.getStyleClass().add("supplier-box");
         hbox.setSpacing(10);
 
         return hbox;
     }
+
+
+
+    public void deleteSupplier(Supplier supplier){
+        String sql = "DELETE FROM suppliers WHERE supplier_id = ?;";
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/invordersys", "root", "root");
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+
+            stmt.setInt(1,supplier.getId());
+            stmt.executeUpdate();
+
+            Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete!!");
+            alert.setHeaderText("Warehouse Deleted!!");
+            alert.setContentText("Warehouse Deleted Succsesfuly");
+            alert.showAndWait();
+            showSuppliers();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void openSupplierUpdate(Supplier supplier){
+        try{
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("fxml/updateSupplier.fxml"));
+            Parent root = loader.load();
+
+            UpdateSupplierController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setSupplier(supplier);
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(MainApplication.class.getResource("/css/style.css")).toExternalForm()
+            );
+
+            Stage stage = new Stage();
+            stage.setTitle("Update supplier");
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
     public void searchSupplier() {
         String searchValue = searchSupplier.getText();

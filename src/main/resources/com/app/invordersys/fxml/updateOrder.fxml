@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.invordersys.controllers.UpdateOrderController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <ScrollPane AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0" fitToWidth="true">
+        <VBox spacing="20" styleClass="content-pane">
+
+            <!-- Form Container -->
+            <VBox styleClass="form-container">
+                <Label text="Update Order" styleClass="form-title"/>
+
+                <VBox spacing="5">
+                    <Label text="Customer:" styleClass="label"/>
+                    <ComboBox fx:id="customerField" promptText="Select Customer" styleClass="combo-box"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Order Status:" styleClass="label"/>
+                    <ComboBox fx:id="statusField" promptText="Select Status" styleClass="combo-box" />
+                </VBox>
+            </VBox>
+
+            <!-- Order Items Section -->
+            <VBox styleClass="form-container">
+                <Label text="Order Items" styleClass="form-title"/>
+
+                <VBox spacing="5">
+                    <Label text="Order Items:" styleClass="section-label"/>
+                    <ListView fx:id="orderItemsList" prefHeight="150" styleClass="list-view"/>
+                </VBox>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Update Order" fx:id="updateBtn" styleClass="primary-button"/>
+                <Button text="Cancel" styleClass="secondary-button"/>
+            </HBox>
+
+        </VBox>
+    </ScrollPane>
+
+</AnchorPane>

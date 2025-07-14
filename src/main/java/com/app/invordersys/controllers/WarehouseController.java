@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -78,12 +79,72 @@ public class WarehouseController {
         Label nameLabel = new Label(warehouse.getName());
         Label locationLabel = new Label(warehouse.getLocation());
 
-        HBox hbox = new HBox(nameLabel, locationLabel);
+        Button updateBtn = new Button("Update");
+        updateBtn.getStyleClass().add("update-button");
+        updateBtn.setOnAction(e-> openWarehouseUpdate(warehouse));
+
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.getStyleClass().add("delete-button");
+        deleteBtn.setOnAction(e-> deleteWarehouse(warehouse));
+
+        HBox hbox = new HBox(nameLabel, locationLabel,updateBtn,deleteBtn);
         hbox.getStyleClass().add("warehouse-box");
         hbox.setSpacing(10);
 
         return hbox;
     }
+
+    public void deleteWarehouse(Warehouse warehouse){
+        String sql = "DELETE FROM warehouse_locations WHERE warehouse_id = ?;";
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/invordersys", "root", "root");
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+
+            stmt.setInt(1,warehouse.getId());
+            stmt.executeUpdate();
+
+            Alert alert= new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete!!");
+            alert.setHeaderText("Warehouse Deleted!!");
+            alert.setContentText("Warehouse Deleted Succsesfuly");
+            alert.showAndWait();
+            showWarehouses();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void openWarehouseUpdate(Warehouse warehouse){
+        try{
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("fxml/updateWarehouse.fxml"));
+            Parent root = loader.load();
+
+            UpdateWarehouseController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setWarehouse(warehouse);
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(MainApplication.class.getResource("/css/style.css")).toExternalForm()
+            );
+
+            Stage stage = new Stage();
+            stage.setTitle("Update Warehouse");
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
 
     public void searchWarehouse() {
         String searchValue = searchWarehouse.getText();

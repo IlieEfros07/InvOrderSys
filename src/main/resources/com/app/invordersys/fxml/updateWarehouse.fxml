@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.app.invordersys.controllers.UpdateWarehouseController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <!-- Form Container -->
+        <VBox styleClass="form-container">
+            <Label text="Update Warehouse" styleClass="form-title"/>
+
+            <TextField fx:id="locationNameField" promptText="Location Name" styleClass="text-field"/>
+
+            <TextField fx:id="addressField" promptText="Full Address" styleClass="text-field"/>
+
+            <HBox spacing="15" alignment="CENTER">
+                <Button text="Update Warehouse" fx:id="updateBtn" styleClass="primary-button"/>
+                <Button text="Cancel" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+
+    </VBox>
+
+
+</AnchorPane>

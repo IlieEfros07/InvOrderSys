@@ -334,3 +334,61 @@
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
+
+
+.update-button {
+    -fx-background-color: linear-gradient(to bottom, #3b82f6 0%, #2563eb 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 3);
+    -fx-pref-width: 100;
+    -fx-pref-height: 40;
+}
+
+.update-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #2563eb 0%, #1d4ed8 100%);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 12, 0, 0, 4);
+}
+
+.update-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #1d4ed8 0%, #1e40af 100%);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 1);
+}
+
+/* Delete Button - Red/Danger Theme */
+.delete-button {
+    -fx-background-color: linear-gradient(to bottom, #ef4444 0%, #dc2626 100%);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 20;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 3);
+    -fx-pref-width: 100;
+    -fx-pref-height: 40;
+}
+
+.delete-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #dc2626 0%, #b91c1c 100%);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 12, 0, 0, 4);
+}
+
+.delete-button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #b91c1c 0%, #991b1b 100%);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 1);
+}

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -77,11 +78,65 @@ public class OrderController {
         Label customerLabel = new Label(order.getCustomerName());
         Label statusLabel = new Label(order.getStatus());
 
-        HBox hbox = new HBox(idLabel, customerLabel, statusLabel);
+        Button updateBtn = new Button("Update");
+        updateBtn.getStyleClass().add("update-button");
+        updateBtn.setOnAction(e-> openOrderUpdate(order));
+
+        Button deleteBtn = new Button("Delete");
+        deleteBtn.getStyleClass().add("delete-button");
+        deleteBtn.setOnAction(e-> deleteOrder(order));
+
+        HBox hbox = new HBox(idLabel, customerLabel, statusLabel,updateBtn,deleteBtn);
         hbox.getStyleClass().add("order-box");
         hbox.setSpacing(10);
         return hbox;
     }
+
+    public void openOrderUpdate(Order order) {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("fxml/updateOrder.fxml"));
+            Parent root = loader.load();
+
+            UpdateOrderController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setOrder(order);
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(
+                    Objects.requireNonNull(MainApplication.class.getResource("/css/style.css")).toExternalForm()
+            );
+
+            Stage stage = new Stage();
+            stage.setTitle("Update Order");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteOrder(Order order) {
+        String sql = "DELETE FROM orders WHERE order_id = ?";
+
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/invordersys", "root", "root");
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, order.getId());
+            stmt.executeUpdate();
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Order Deleted");
+            alert.setHeaderText(null);
+            alert.setContentText("Order successfully deleted.");
+            alert.showAndWait();
+
+            showOrders();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void searchOrders() {
         String searchValue = searchOrder.getText().trim();
